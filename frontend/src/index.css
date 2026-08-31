@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Ethiopic', system-ui, -apple-system, sans-serif;
+  }
+
+  .font-serif-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  h1, h2, h3, .font-serif-ethiopia {
+    font-family: 'Cinzel', 'Noto Sans Ethiopic', serif;
+  }
+}
+
+/* Authentic Ethiopian Tibeb Pattern border strip */
+.tibeb-border-gradient {
+  background: linear-gradient(90deg, 
+    #1b5e20 0%, #1b5e20 16.6%, 
+    #ffd600 16.6%, #ffd600 33.3%, 
+    #b71c1c 33.3%, #b71c1c 50%,
+    #8d6e63 50%, #8d6e63 66.6%,
+    #e65100 66.6%, #e65100 83.3%,
+    #1b5e20 83.3%, #1b5e20 100%
+  );
+  background-size: 60px 100%;
+}
+
+.tibeb-accent-pattern {
+  background-image: radial-gradient(#d97706 0.75px, transparent 0.75px), radial-gradient(#15803d 0.75px, #fcfaf7 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f0eb;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6cbbf;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b5a494;
+}
