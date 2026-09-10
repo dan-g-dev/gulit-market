@@ -3,6 +3,7 @@
 // of the UI (ProductCard, ProductDetailModal, CartDrawer, ...) doesn't need
 // to change.
 import { Product, ProductCategory, ItemCondition, Review, Order, CartItem } from '../types';
+import { assetUrl } from './assetUrl';
 
 // Backend prices are ETB-only; the frontend also displays USD, so we derive
 // a display-only USD figure from a reference rate. This is NOT used for any
@@ -88,7 +89,7 @@ export function listingToProduct(listing: ApiListing): Product {
     descriptionAm: listing.descriptionAm || listing.description || '',
     featuresEn: [],
     featuresAm: [],
-    images: listing.images?.length ? listing.images : ['/placeholder-images/gulit_market_placeholder.jpg'],
+    images: (listing.images?.length ? listing.images : ['/placeholder-images/gulit_market_placeholder.jpg']).map(assetUrl),
   };
 }
 

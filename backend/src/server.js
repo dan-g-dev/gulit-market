@@ -2,6 +2,8 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import authRoutes from './routes/auth.routes.js';
 import categoriesRoutes from './routes/categories.routes.js';
@@ -18,6 +20,11 @@ import adminRoutes from './routes/admin.routes.js';
 import paymentsRoutes from './routes/payments.routes.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
+// ES modules don't have __dirname built in, so it's derived from
+// import.meta.url instead — needed below to serve static images.
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
 const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000')
@@ -27,6 +34,11 @@ const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000')
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json({ limit: '2mb' }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+
+// Serves product images from backend/public/placeholder-images/*
+// at https://<this-api>/placeholder-images/*, matching the paths
+// stored in listing_images.url (e.g. "/placeholder-images/x.jpg").
+app.use('/placeholder-images', express.static(path.join(__dirname, '..', 'public', 'placeholder-images')));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
